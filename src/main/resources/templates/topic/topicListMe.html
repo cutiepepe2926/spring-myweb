@@ -24,7 +24,7 @@
                         </div>
                     </div>
 
-                    <form name="###########" action="############" method="get" >
+                    <form name="actionForm" action="" method="get" >
 
                         <div class="full_collum collum">
                             <ul>
@@ -50,36 +50,20 @@
                                                     <th>수정/삭제</th>
                                                 </tr>
 
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>admin</td>
-                                                    <td>오늘은 해가뜨려나?</td>
+                                                <tr th:each="vo : ${topicList}">
+                                                    <td>[[${vo.topicId}]]</td>
+                                                    <td>[[${vo.topicWriter}]]</td>
+                                                    <td>[[${vo.topicName}]]</td>
                                                     <td>
-                                                        오늘은 비가오려나?
+                                                        <a title="상세보기(클릭)" th:href="@{topicDetail(topicId=${vo.topicId})}">상세보기</a>
                                                     </td>
-                                                    <td>2016-01-01</td>
+                                                    <td>[[${#temporals.format(vo.topicRegdate, 'yyyy-MM-dd HH:mm:ss')}]]</td>
                                                     <td>
-                                                        <a href="#">수정</a>
+                                                        <a th:href="@{topicModify(topicId=${vo.topicId})}" >수정</a>
                                                         /
-                                                        <a href="#">삭제</a>
+                                                        <a th:href="@{topicModify(topicId=${vo.topicId})}" >삭제</a>
                                                     </td>
                                                 </tr>
-
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>admin</td>
-                                                    <td>세상에서 가장 가난한 임금은?</td>
-                                                    <td>
-                                                        최저임금
-                                                    </td>
-                                                    <td>2016-01-01</td>
-                                                    <td>
-                                                        <a href="#">수정</a>
-                                                        /
-                                                        <a href="#">삭제</a>
-                                                    </td>
-                                                </tr>
-
                                             </table>
 
 
@@ -179,4 +163,7 @@
 
 </th:block>
 <script src="../js/modal.js"></script>
+<script>
+
+</script>
 </html>

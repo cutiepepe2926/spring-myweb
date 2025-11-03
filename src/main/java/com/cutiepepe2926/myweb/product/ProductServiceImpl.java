@@ -1,6 +1,7 @@
 package com.cutiepepe2926.myweb.product;
 
 import com.cutiepepe2926.myweb.command.ProductVO;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,25 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public int prodRegist(ProductVO productVO) {
         return productMapper.prodRegist(productVO);
+    }
+
+    @Override
+    public List<ProductVO> getList(String prodWriter) {
+        return productMapper.getList(prodWriter);
+    }
+
+    @Override
+    public ProductVO getDetail(long prodId) {
+        return productMapper.getDetail(prodId);
+    }
+
+    @Override
+    public int prodUpdate(ProductVO productVO) {
+        return productMapper.prodUpdate(productVO);
+    }
+
+    @Override
+    public int prodDelete(long prodId) {
+        return productMapper.prodDelete(prodId);
     }
 }

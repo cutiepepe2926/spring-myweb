@@ -17,4 +17,43 @@
                    #{topicContent}
                )
     </insert>
+
+    <select id="getAllList" resultType="TopicVO" parameterType="string">
+        SELECT *
+        FROM TOPIC
+        ORDER BY TOPIC_ID DESC
+    </select>
+
+    <select id="getMyList" resultType="TopicVO" parameterType="string">
+        SELECT *
+        FROM TOPIC
+        WHERE TOPIC_WRITER = #{topicWriter}
+        ORDER BY TOPIC_ID DESC
+    </select>
+
+    <select id="getTopic" resultType="TopicVO" parameterType="int">
+        SELECT *
+        FROM TOPIC
+        WHERE TOPIC_ID = #{topicId}
+    </select>
+
+    <update id="topicUpdate" parameterType="ProductVO">
+        UPDATE TOPIC
+        SET
+            TOPIC_NAME = #{topicName},
+            TOPIC_CONTENT = #{topicContent}
+        WHERE TOPIC_ID = #{topicId} AND TOPIC_WRITER = #{topicWriter}
+    </update>
+
+    <delete id="topicDelete" parameterType="int">
+        DELETE
+        FROM TOPIC
+        WHERE TOPIC_ID = #{topicId}
+    </delete>
+
+    <select id="getTopicDetail" parameterType="int">
+        SELECT *
+        FROM TOPIC
+        WHERE TOPIC_ID = #{topicId}
+    </select>
 </mapper>

@@ -95,27 +95,27 @@
 												<th>등록자</th>
 											</tr>
 												
-											<tr>
-												<td>1</td>
+											<tr th:each="vo, status : ${prodList}">
+												<td>[[${status.count}]]</td>
 												<td>
 													<a href="#" class="normal_btn">정보수정</a>
 													<a href="#" class="normal_btn modalOn">이미지수정</a>													
 												</td>
-												<td>20171518</td>
-												<td>.....</td>
+												<td>[[${vo.prodId}]]</td>
+												<td></td>
 
 												<td>
-													<a title="상세보기(클릭)" href="product_detail.html">
-														비타오백
+													<a title="상세보기(클릭)" th:href="@{productDetail(prodId=${vo.prodId})}">
+                                                        [[${vo.prodName}]]
 													</a>
 												</td>
-												<td>2017-03-01</td>
-												<td>16,000</td>
-												<td>0개</td>
-												<td>15%</td>
-												<td>판매중</td>
-												<td>처리완료</td>
-												<td>이규호</td>
+												<td>[[${ #temporals.format(vo.prodRegdate, 'yyyy-MM-dd HH:mm:ss')}]]</td>
+												<td>[[${vo.prodPrice}]]원</td>
+												<td>[[${vo.prodCount}]]개</td>
+												<td>[[${vo.prodDiscount}]]</td>
+												<td>[[${vo.prodPurchaseYn}]]</td>
+												<td>[[${vo.prodEnddate}]]</td>
+												<td>[[${vo.prodWriter}]]</td>
 
 											</tr>
 										</table>

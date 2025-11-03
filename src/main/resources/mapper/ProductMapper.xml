@@ -26,4 +26,37 @@
                 #{prodComment}
                 )
     </insert>
+
+    <select id="getList" resultType="ProductVO" parameterType="string">
+        SELECT *
+        FROM PRODUCT
+        WHERE PROD_WRITER = #{prodWriter}
+        ORDER BY PROD_ID DESC
+    </select>
+
+    <select id="getDetail" parameterType="long">
+        SELECT *
+        FROM PRODUCT
+        WHERE PROD_ID = #{prodId}
+    </select>
+
+    <update id="prodUpdate" parameterType="ProductVO">
+        UPDATE PRODUCT
+        SET
+            PROD_ENDDATE = #{prodEnddate},
+            PROD_NAME = #{prodName},
+            PROD_PRICE = #{prodPrice},
+            PROD_COUNT = #{prodCount},
+            PROD_DISCOUNT = #{prodDiscount},
+            PROD_PURCHASE_YN = #{prodPurchaseYn},
+            PROD_CONTENT = #{prodContent},
+            PROD_COMMENT = #{prodComment}
+        WHERE PROD_ID = #{prodId}
+    </update>
+
+    <delete id="prodDelete" parameterType="long">
+        DELETE
+        FROM PRODUCT
+        WHERE PROD_ID = #{prodId}
+    </delete>
 </mapper>

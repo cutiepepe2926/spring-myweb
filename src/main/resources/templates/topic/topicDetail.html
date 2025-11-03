@@ -35,22 +35,22 @@
                                                     <tr>
                                                         <th>등록일</th>
                                                         <td>
-                                                            <span>2016-01-01</span>
+                                                            <span>[[${ #temporals.format(vo.topicRegdate, 'yyyy-MM-dd')}]]</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th>아이디</th>
-                                                        <td>admin</td>
+                                                        <td>[[${vo.topicWriter}]]</td>
                                                     </tr>
 
                                                     <tr>
                                                         <th>제목</th>
-                                                        <td colspan="5">오늘은 해가뜨려나?</td>
+                                                        <td colspan="5">[[${vo.topicName}]]</td>
                                                     </tr>
                                                     <tr>
                                                         <th>내용</th>
                                                         <td colspan="5">
-                                                            <div style="min-height: 300px;">오늘은 비가오려나?
+                                                            <div style="min-height: 300px;">[[${vo.topicContent}]]
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -58,8 +58,8 @@
 
                                                 </table>
                                                 <div class="btn_area">
-                                                    <input type="button" class="save" value="등록하러가기">
-                                                    <input type="button" class="delete" value="전체목록으로">
+                                                    <input type="button" id="goReg"  class="save" value="등록하러가기">
+                                                    <input type="button" id="goAllList"  class="delete" value="전체목록으로">
 
                                                 </div>
                                             </li>
@@ -79,4 +79,12 @@
         <!-- wrap end -->
 
     </th:block>
+<script th:inline="javascript">
+    document.getElementById("goReg").addEventListener("click", function() {
+        location.href = '/topic/topicReg';
+    })
+    document.getElementById("goAllList").addEventListener("click", function() {
+        location.href = '/topic/topicListAll';
+    })
+</script>
 </html>
