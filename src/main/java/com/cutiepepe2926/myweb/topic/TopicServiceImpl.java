@@ -1,6 +1,7 @@
 package com.cutiepepe2926.myweb.topic;
 
 import com.cutiepepe2926.myweb.command.TopicVO;
+import com.cutiepepe2926.myweb.util.Criteria;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,13 +20,23 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<TopicVO> getAllList() {
-        return topicMapper.getAllList();
+    public List<TopicVO> getAllList(String topicWriter, Criteria cri) {
+        return topicMapper.getAllList(topicWriter, cri);
     }
 
     @Override
-    public List<TopicVO> getMyList(String topicWriter) {
-        return topicMapper.getMyList(topicWriter);
+    public int getAllTotal(String topicWriter, Criteria cri) {
+        return topicMapper.getAllTotal(topicWriter, cri);
+    }
+
+    @Override
+    public List<TopicVO> getMyList(String topicWriter, Criteria cri) {
+        return topicMapper.getMyList(topicWriter, cri);
+    }
+
+    @Override
+    public int getMyTotal(String topicWriter) {
+        return topicMapper.getMyTotal(topicWriter);
     }
 
     @Override

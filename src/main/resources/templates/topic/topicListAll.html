@@ -26,18 +26,20 @@
                     </div>
                     <div class="page_title">관리자검색</div>
 
-                    <form name="###########" action="############" method="get" >
+                    <form name="actionForm" action="topicList" method="get" >
                         <div class="search_block flfull">
+                            <input type="hidden" name="page" value="1" />
+                            <input type="hidden" name="amount" th:value="${pageVO.amount}" />
 
                             <div class="fl">
                                 <div>
                                     <span class="search_th">제목 검색</span>
-                                    <input type="text" class="" placeholder="제목 검색">
+                                    <input type="text" class="" name="searchName" th:value="${criteria.searchName}" placeholder="제목 검색">
                                 </div>
 
                                 <div>
                                     <span class="search_th">닉네임 검색</span>
-                                    <input type="text" class="" placeholder="닉네임 검색">
+                                    <input type="text" class="" name="searchWriter" th:value="${criteria.searchWriter}" placeholder="닉네임 검색">
                                 </div>
 
                                 <!--
@@ -51,8 +53,8 @@
 
                             <div class="fr">
                                 <div class="search_btn_area">
-                                    <a href="#" class="normal_btn purplebtn">검색</a>
-                                    <a href="#" class="normal_btn purplebtn02">등록</a>
+                                    <input type="submit" class="normal_btn purplebtn" value="검색">
+                                    <a href="topicReg" class="normal_btn purplebtn02">등록</a>
                                 </div>
                             </div>
                         </div>
@@ -62,11 +64,11 @@
                                 <li class="collum_tit">
                                     <h2>판매자 소통공간</h2>
 
-                                    <select class="">
-                                        <option value="10">10개 보기</option>
-                                        <option value="20">20개 보기</option>
-                                        <option value="40">40개 보기</option>
-                                        <option value="80">80개 보기</option>
+                                    <select class="" id="handleAmount">
+                                        <option value="10" th:selected="${pageVO.amount==10}">10개 보기</option>
+                                        <option value="20" th:selected="${pageVO.amount==20}">20개 보기</option>
+                                        <option value="40" th:selected="${pageVO.amount==40}">40개 보기</option>
+                                        <option value="80" th:selected="${pageVO.amount==80}">80개 보기</option>
                                     </select>
                                     <span class="showtoggle minus"></span>
                                     <ul>
@@ -94,19 +96,51 @@
 
                                             <div class="page">
                                                 <ul>
-                                                    <li><a href="#"><i class="fa fa-angle-double-left"
-                                                                       aria-hidden="true"></i></a></li>
-                                                    <li style="margin-right:5px;"><a href="#"><i class="fa fa-angle-left"
-                                                                                                 aria-hidden="true"></i></a></li>
-                                                    <li class="on"><a href="#">1</a></li>
-                                                    <li><a href="#">2</a></li>
-                                                    <li><a href="#">3</a></li>
-                                                    <li><a href="#">4</a></li>
-                                                    <li><a href="#">5</a></li>
-                                                    <li style="margin-left:5px;"><a href="#"><i class="fa fa-angle-right"
-                                                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-angle-double-right"
-                                                                       aria-hidden="true"></i></a></li>
+                                                    <li>
+                                                        <a th:href="@{topicListAll(page=1,amount=${pageVO.amount},
+                                                        searchName=${criteria.searchName},
+                                                        searchWriter=${criteria.searchWriter})}">
+                                                            <i class="fa fa-angle-double-left"
+                                                               aria-hidden="true">
+                                                            </i>
+                                                        </a>
+                                                    </li>
+                                                    <th:block th:if="${pageVO.prev}">
+                                                        <li style="margin-right:5px;">
+                                                            <a th:href="@{topicListAll(page= ${pageVO.start -1}, amount=${pageVO.amount},
+                                                        searchName=${criteria.searchName},
+                                                        searchWriter=${criteria.searchWriter})}">
+                                                                <i class="fa fa-angle-left"
+                                                                   aria-hidden="true">
+                                                                </i>
+                                                            </a>
+                                                        </li>
+                                                    </th:block>
+
+                                                    <th:block th:each="page : ${pageVO.pageList}">
+                                                        <li th:class="${pageVO.page==page? 'on' : ''}">
+                                                            <a th:href="@{topicListAll(page=${page},amount=${pageVO.amount},
+                                                        searchName=${criteria.searchName},
+                                                        searchWriter=${criteria.searchWriter})}">
+                                                                [[${page}]]
+                                                            </a>
+                                                        </li>
+                                                    </th:block>
+                                                    <th:block th:if="${pageVO.next}">
+                                                        <li style="margin-left:5px;">
+                                                            <a th:href="@{topicListAll(page=${pageVO.end +1},amount=${pageVO.amount},
+                                                        searchName=${criteria.searchName},
+                                                        searchWriter=${criteria.searchWriter})}">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true">
+                                                                </i>
+                                                            </a>
+                                                        </li>
+                                                    </th:block>
+                                                    <li><a th:href="@{topicListAll(page=${pageVO.realEnd},amount=${pageVO.amount},
+                                                        searchName=${criteria.searchName},
+                                                        searchWriter=${criteria.searchWriter})}"><i class="fa fa-angle-double-right"
+                                                                                                                                       aria-hidden="true"></i></a></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -189,4 +223,13 @@
 </th:block>
 
 <script src="../js/modal.js"></script>
+<script th:inline="javascript">
+    let handleAmount = document.getElementById('handleAmount');
+    handleAmount.addEventListener('change', function(e) {
+        //location.href = 'productList?page=1&amount=' + e.target.value;
+        // 검색 form을 그대로 submit하는 형태로 변경해줌
+        document.actionForm.value = e.target.value;
+        document.actionForm.submit();
+    })
+</script>
 </html>

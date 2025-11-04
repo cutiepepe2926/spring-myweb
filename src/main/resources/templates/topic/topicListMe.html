@@ -31,11 +31,11 @@
                                 <li class="collum_tit">
                                     <h2>내글 목록</h2>
 
-                                    <select class="">
-                                        <option value="10">10개 보기</option>
-                                        <option value="20">20개 보기</option>
-                                        <option value="40">40개 보기</option>
-                                        <option value="80">80개 보기</option>
+                                    <select class="" id="handleAmount">
+                                        <option value="10" th:selected="${pageVO.amount==10}">10개 보기</option>
+                                        <option value="20" th:selected="${pageVO.amount==20}">20개 보기</option>
+                                        <option value="40" th:selected="${pageVO.amount==40}">40개 보기</option>
+                                        <option value="80" th:selected="${pageVO.amount==80}">80개 보기</option>
                                     </select>
                                     <span class="showtoggle minus"></span>
                                     <ul>
@@ -69,19 +69,41 @@
 
                                             <div class="page">
                                                 <ul>
-                                                    <li><a href="#"><i class="fa fa-angle-double-left"
-                                                                       aria-hidden="true"></i></a></li>
-                                                    <li style="margin-right:5px;"><a href="#"><i class="fa fa-angle-left"
-                                                                                                 aria-hidden="true"></i></a></li>
-                                                    <li class="on"><a href="#">1</a></li>
-                                                    <li><a href="#">2</a></li>
-                                                    <li><a href="#">3</a></li>
-                                                    <li><a href="#">4</a></li>
-                                                    <li><a href="#">5</a></li>
-                                                    <li style="margin-left:5px;"><a href="#"><i class="fa fa-angle-right"
-                                                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-angle-double-right"
-                                                                       aria-hidden="true"></i></a></li>
+                                                    <li>
+                                                        <a th:href="@{topicListMe(page=1,amount=${pageVO.amount})}">
+                                                            <i class="fa fa-angle-double-left"
+                                                               aria-hidden="true">
+                                                            </i>
+                                                        </a>
+                                                    </li>
+                                                    <th:block th:if="${pageVO.prev}">
+                                                        <li style="margin-right:5px;">
+                                                            <a th:href="@{topicListMe(page= ${pageVO.start -1}, amount=${pageVO.amount})}">
+                                                                <i class="fa fa-angle-left"
+                                                                   aria-hidden="true">
+                                                                </i>
+                                                            </a>
+                                                        </li>
+                                                    </th:block>
+
+                                                    <th:block th:each="page : ${pageVO.pageList}">
+                                                        <li th:class="${pageVO.page==page? 'on' : ''}">
+                                                            <a th:href="@{topicListMe(page=${page},amount=${pageVO.amount})}">
+                                                                [[${page}]]
+                                                            </a>
+                                                        </li>
+                                                    </th:block>
+                                                    <th:block th:if="${pageVO.next}">
+                                                        <li style="margin-left:5px;">
+                                                            <a th:href="@{topicListMe(page=${pageVO.end +1},amount=${pageVO.amount})}">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true">
+                                                                </i>
+                                                            </a>
+                                                        </li>
+                                                    </th:block>
+                                                    <li><a th:href="@{topicListMe(page=${pageVO.realEnd},amount=${pageVO.amount})}"><i class="fa fa-angle-double-right"
+                                                                                                                                        aria-hidden="true"></i></a></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -163,7 +185,10 @@
 
 </th:block>
 <script src="../js/modal.js"></script>
-<script>
-
+<script th:inline="javascript">
+    let handleAmount = document.getElementById('handleAmount');
+    handleAmount.addEventListener('change', function(e) {
+        location.href = 'topicListMe?page=1&amount=' + e.target.value;
+    })
 </script>
 </html>

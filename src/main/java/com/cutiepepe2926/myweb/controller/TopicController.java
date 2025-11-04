@@ -2,12 +2,15 @@ package com.cutiepepe2926.myweb.controller;
 
 import com.cutiepepe2926.myweb.command.TopicVO;
 import com.cutiepepe2926.myweb.topic.TopicServiceImpl;
+import com.cutiepepe2926.myweb.util.Criteria;
+import com.cutiepepe2926.myweb.util.PageVO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,17 +36,28 @@ public class TopicController {
 
     // 모든 토픽 리스트 화면
     @GetMapping("/topicListAll")
-    public void topicListAll(Model model){
-        List<TopicVO> topicList = topicService.getAllList();
+    public String topicListAll(@ModelAttribute("criteria") Criteria criteria, Model model){
+        String topicWriter = criteria.getSearchWriter();
+        List<TopicVO> topicList = topicService.getAllList(topicWriter, criteria);
+        int total = topicService.getAllTotal(topicWriter, criteria); //전체 게시글 수
+        PageVO pageVO = new PageVO(criteria, total);
         model.addAttribute("topicList",topicList);
+        model.addAttribute("pageVO",pageVO);
+        return "topic/topicListAll";
     }
 
     // 내 토픽 리스트 화면
     @GetMapping("/topicListMe")
-    public void topicListMe(Model model){
+    public String topicListMe(Criteria criteria, Model model){
         String topicWriter = "cutiepepe";
-        List<TopicVO> topicList = topicService.getMyList(topicWriter);
+        List<TopicVO> topicList = topicService.getMyList(topicWriter, criteria);
+        int total = topicService.getMyTotal(topicWriter);
+        PageVO pageVO = new PageVO(criteria, total);
+
         model.addAttribute("topicList",topicList);
+        model.addAttribute("pageVO",pageVO);
+
+        return "topic/topicListMe";
     }
 
     // 토픽 수정 화면

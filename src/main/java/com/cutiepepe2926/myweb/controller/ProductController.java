@@ -2,12 +2,15 @@ package com.cutiepepe2926.myweb.controller;
 
 import com.cutiepepe2926.myweb.command.ProductVO;
 import com.cutiepepe2926.myweb.product.ProductService;
+import com.cutiepepe2926.myweb.util.Criteria;
+import com.cutiepepe2926.myweb.util.PageVO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,13 +26,20 @@ public class ProductController {
 
     // 목록화면
     @GetMapping("/productList")
-    public String productList(Model model){
+    public String productList(@ModelAttribute("criteria") Criteria criteria, Model model){
         String prodWriter = "cutiepepe";
-        List<ProductVO> prodList = productService.getList(prodWriter);
-        model.addAttribute("prodList",prodList);
-
+        //List<ProductVO> prodList = productService.getList(prodWriter);
+        List<ProductVO> prodList = productService.getList(prodWriter,criteria);
+        int total =  productService.getTotal(prodWriter, criteria); // 전체 게시글 수
+        PageVO pageVO = new PageVO(criteria, total);
+        System.out.println(pageVO);
+        
+        model.addAttribute("prodList",prodList); // 해당 페이지 게시글 리스트
+        model.addAttribute("pageVO",pageVO); // 페이지 정보
         return "product/productList";
     }
+
+
 
     // 등록화면
     @GetMapping("/productReg")

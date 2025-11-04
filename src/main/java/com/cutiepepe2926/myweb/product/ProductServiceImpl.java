@@ -1,6 +1,7 @@
 package com.cutiepepe2926.myweb.product;
 
 import com.cutiepepe2926.myweb.command.ProductVO;
+import com.cutiepepe2926.myweb.util.Criteria;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,9 +19,13 @@ public class ProductServiceImpl implements ProductService{
         return productMapper.prodRegist(productVO);
     }
 
+//    @Override
+//    public List<ProductVO> getList(String prodWriter) {
+//        return productMapper.getList(prodWriter);
+//    }
     @Override
-    public List<ProductVO> getList(String prodWriter) {
-        return productMapper.getList(prodWriter);
+    public List<ProductVO> getList(String prodWriter, Criteria cri) {
+        return productMapper.getList(prodWriter, cri);
     }
 
     @Override
@@ -31,6 +36,11 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public int prodUpdate(ProductVO productVO) {
         return productMapper.prodUpdate(productVO);
+    }
+
+    @Override
+    public int getTotal(String prodWriter, Criteria cri) {
+        return productMapper.getTotal(prodWriter, cri);
     }
 
     @Override
