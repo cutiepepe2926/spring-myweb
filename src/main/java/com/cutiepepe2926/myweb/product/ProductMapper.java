@@ -1,5 +1,8 @@
 package com.cutiepepe2926.myweb.product;
 
+import com.cutiepepe2926.myweb.command.CategoryVO;
+import com.cutiepepe2926.myweb.command.DemoMemberVO;
+import com.cutiepepe2926.myweb.command.DemoOrderVO;
 import com.cutiepepe2926.myweb.command.ProductVO;
 import com.cutiepepe2926.myweb.util.Criteria;
 import java.util.List;
@@ -19,6 +22,12 @@ public interface ProductMapper {
     ProductVO getDetail(long prodId); // 특정 Id 상세조회
     int prodUpdate(ProductVO productVO); //상품 수정
     int prodDelete(long prodId); // 상품 삭제
+    List<CategoryVO> getCategoryList(); // 대분류 카테고리 조회
+    List<CategoryVO> getCategoryChildList(CategoryVO categoryVO); // 중분류 카테고리 조회
+    
+    //조인 연습
+    List<DemoOrderVO> manyToOne(); //N:1 조인용
+    DemoMemberVO oneToMany(); //1:N 회원정보만 갖고 나가기
 
 
 }

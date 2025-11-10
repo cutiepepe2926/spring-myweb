@@ -21,18 +21,17 @@
     <select id="getAllList" resultType="TopicVO">
         SELECT *
         FROM TOPIC
-        ORDER BY TOPIC_ID DESC
         <where>
             <if test="cri.searchName != '' and cri.searchName != null ">
                 TOPIC_NAME LIKE CONCAT('%', #{cri.searchName}, '%')
             </if>
             <if test="cri.searchWriter != '' and cri.searchWriter != null ">
-                AND TOPIC_NAME LIKE CONCAT('%', #{cri.searchWriter}, '%')
+                AND TOPIC_WRITER LIKE CONCAT('%', #{cri.searchWriter}, '%')
             </if>
 
         </where>
-
-        LIMIT #{pageStart}, #{amount}
+        ORDER BY TOPIC_ID DESC
+        LIMIT #{cri.pageStart}, #{cri.amount}
     </select>
 
     <select id="getAllTotal" resultType="int">
@@ -44,7 +43,7 @@
                 TOPIC_NAME LIKE CONCAT('%', #{cri.searchName}, '%')
             </if>
             <if test="cri.searchWriter != '' and cri.searchWriter != null ">
-                AND TOPIC_NAME LIKE CONCAT('%', #{cri.searchWriter}, '%')
+                AND TOPIC_WRITER LIKE CONCAT('%', #{cri.searchWriter}, '%')
             </if>
 
         </where>

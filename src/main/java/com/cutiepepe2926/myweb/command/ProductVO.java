@@ -30,4 +30,8 @@ public class ProductVO {
     private String prodContent;
     private String prodComment;
 
+
+    //조인 된 컬럼 결과 - 단순히 가져갈 퀄럼이 1개
+    private String categoryNav;
+
 }

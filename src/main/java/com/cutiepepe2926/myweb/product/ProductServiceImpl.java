@@ -1,5 +1,6 @@
 package com.cutiepepe2926.myweb.product;
 
+import com.cutiepepe2926.myweb.command.CategoryVO;
 import com.cutiepepe2926.myweb.command.ProductVO;
 import com.cutiepepe2926.myweb.util.Criteria;
 import java.util.List;
@@ -46,5 +47,15 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public int prodDelete(long prodId) {
         return productMapper.prodDelete(prodId);
+    }
+
+    @Override
+    public List<CategoryVO>  getCategoryList() {
+        return productMapper.getCategoryList();
+    }
+
+    @Override
+    public List<CategoryVO> getCategoryChildList(CategoryVO categoryVO) {
+        return productMapper.getCategoryChildList(categoryVO);
     }
 }

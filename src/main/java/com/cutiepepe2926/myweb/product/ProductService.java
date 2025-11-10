@@ -1,5 +1,6 @@
 package com.cutiepepe2926.myweb.product;
 
+import com.cutiepepe2926.myweb.command.CategoryVO;
 import com.cutiepepe2926.myweb.command.ProductVO;
 import com.cutiepepe2926.myweb.util.Criteria;
 import java.util.List;
@@ -17,4 +18,7 @@ public interface ProductService {
     ProductVO getDetail(long prodId); // 특정 Id 상세조회
     int prodUpdate(ProductVO productVO); // 상품 수정
     int prodDelete(long prodId); // 상품 삭제
+    List<CategoryVO> getCategoryList(); // 대분류 카테고리 조회
+    List<CategoryVO> getCategoryChildList(CategoryVO categoryVO); // 중분류 카테고리 조회
+
 }

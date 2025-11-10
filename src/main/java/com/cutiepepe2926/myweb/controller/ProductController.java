@@ -27,12 +27,13 @@ public class ProductController {
     // 목록화면
     @GetMapping("/productList")
     public String productList(@ModelAttribute("criteria") Criteria criteria, Model model){
-        String prodWriter = "cutiepepe";
+        String prodWriter = "ㅂㅈㄷㄱ";
         //List<ProductVO> prodList = productService.getList(prodWriter);
         List<ProductVO> prodList = productService.getList(prodWriter,criteria);
         int total =  productService.getTotal(prodWriter, criteria); // 전체 게시글 수
         PageVO pageVO = new PageVO(criteria, total);
         System.out.println(pageVO);
+        System.out.println(prodList.toString());
         
         model.addAttribute("prodList",prodList); // 해당 페이지 게시글 리스트
         model.addAttribute("pageVO",pageVO); // 페이지 정보
