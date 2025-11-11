@@ -5,10 +5,11 @@ import com.cutiepepe2926.myweb.command.ProductVO;
 import com.cutiepepe2926.myweb.util.Criteria;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 
 public interface ProductService {
-    int prodRegist(ProductVO productVO); // 등록
+    int prodRegist(ProductVO productVO, List<MultipartFile> files); // 등록
     //List<ProductVO> getList(String prodWriter); // 조회
     //파라미터가 2개 이상이면 @Param으로 이름 명시
     List<ProductVO> getList(@Param("prodWriter") String prodWriter,

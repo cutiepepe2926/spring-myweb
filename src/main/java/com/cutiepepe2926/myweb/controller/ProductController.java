@@ -5,6 +5,7 @@ import com.cutiepepe2926.myweb.product.ProductService;
 import com.cutiepepe2926.myweb.util.Criteria;
 import com.cutiepepe2926.myweb.util.PageVO;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -58,9 +60,13 @@ public class ProductController {
 
     // 상품등록
     @PostMapping("/prodRegist")
-    public String prodRegist(ProductVO  productVO){
+    public String prodRegist(ProductVO  productVO,
+                             @RequestParam("file") List<MultipartFile> files){
         System.out.println(productVO.toString());
-        productService.prodRegist(productVO);
+
+
+        System.out.println(files.toString());
+        productService.prodRegist(productVO, files);
 
         return "redirect:/product/productList";
     }

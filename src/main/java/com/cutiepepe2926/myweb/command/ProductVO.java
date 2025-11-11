@@ -1,6 +1,7 @@
 package com.cutiepepe2926.myweb.command;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 //@Getter
 //@Setter
@@ -29,6 +31,9 @@ public class ProductVO {
     private String prodPurchaseYn;
     private String prodContent;
     private String prodComment;
+
+    //파일객체 선언
+
 
 
     //조인 된 컬럼 결과 - 단순히 가져갈 퀄럼이 1개

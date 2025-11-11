@@ -223,4 +223,28 @@
         ON O.MID = M.MID
         WHERE   O.MID =1
     </select>
+
+<!--    파일 이미지 등록-->
+    <insert id="fileRegist" parameterType="ProductUploadVO">
+--         INSERT 전 OR 후에 특정 테이블의 키값을 얻을 때 사용함
+--          order = before, after
+--          keyProperty = 조회한 키를 저장한 멤버변수
+--          resultType = 반환타입
+        <selectKey order="BEFORE" keyProperty="prodId" resultType="long">
+            SELECT MAX(PROD_ID) FROM PRODUCT WHERE PROD_WRITER = #{prodWriter}
+        </selectKey>
+        INSERT INTO PRODUCT_UPLOAD (
+            FILENAME,
+            FILEPATH,
+            UUID,
+            PROD_ID,
+            PROD_WRITER
+        ) VALUES (
+                 #{filename},
+                 #{filepath},
+                 #{uuid},
+                 #{prodId},
+                 #{prodWriter}
+        )
+    </insert>
 </mapper>

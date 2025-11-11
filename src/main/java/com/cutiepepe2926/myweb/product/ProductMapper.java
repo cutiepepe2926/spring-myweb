@@ -3,15 +3,20 @@ package com.cutiepepe2926.myweb.product;
 import com.cutiepepe2926.myweb.command.CategoryVO;
 import com.cutiepepe2926.myweb.command.DemoMemberVO;
 import com.cutiepepe2926.myweb.command.DemoOrderVO;
+import com.cutiepepe2926.myweb.command.ProductUploadVO;
 import com.cutiepepe2926.myweb.command.ProductVO;
 import com.cutiepepe2926.myweb.util.Criteria;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 @Mapper
 public interface ProductMapper {
     int prodRegist(ProductVO productVO); // 등록
+
+    int fileRegist(ProductUploadVO productUploadVO); // 파일 이미지 등록
+
     //List<ProductVO> getList(String prodWriter); //조회
     
     //파라미터가 2개 이상이면 @Param으로 이름 명시
