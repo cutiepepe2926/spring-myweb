@@ -530,5 +530,28 @@ LEFT JOIN DEMO_ORDER O
 ON O.MID = M.MID
 WHERE O.MID =1;
 
+CREATE TABLE PRODUCT_UPLOAD (
+	UPLOAD_NO INT PRIMARY KEY auto_increment,
+	FILENAME varchar(100) not null, ##실제파일명
+	FILEPATH varchar(100) not null, ##폴더명
+	UUID varchar(50) not null, ##UUID명
+	REGDATE TIMESTAMP default now(),
+	PROD_ID INT, ##FK
+	PROD_WRITER VARCHAR(20) ##FK
+);
 
+productCREATE TABLE PRODUCT_UPLOAD (
+	UPLOAD_NO INT PRIMARY KEY auto_increment,
+	FILENAME varchar(100) not null, ##실제파일명
+	FILEPATH varchar(100) not null, ##폴더명
+	UUID varchar(50) not null, ##UUID명
+	REGDATE TIMESTAMP default now(),
+	PROD_ID INT, ##FK
+	PROD_WRITER VARCHAR(20) ##FK
+);
 
+SELECT * FROM PRODUCT_UPLOAD;
+
+COMMIT;
+
+SELECT * FROM USERS;

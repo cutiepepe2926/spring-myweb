@@ -25,6 +25,10 @@ public interface ProductMapper {
     int getTotal(@Param("prodWriter") String prodWriter,
                  @Param("cri") Criteria cri); //전체 게시글 수
     ProductVO getDetail(long prodId); // 특정 Id 상세조회
+
+    List<ProductUploadVO> getDetailFile(long prodId); //상세조회(파일)
+    
+
     int prodUpdate(ProductVO productVO); //상품 수정
     int prodDelete(long prodId); // 상품 삭제
     List<CategoryVO> getCategoryList(); // 대분류 카테고리 조회

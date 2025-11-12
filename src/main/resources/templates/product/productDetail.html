@@ -54,42 +54,28 @@
                                                     <tr>
                                                         <th>메인사진</th>
                                                         <td colspan="3">
+
+                                                            [[${fileList}]]
+
                                                             <!--미리보기 폼-->
                                                             <div class="blockContent">
                                                                 <div class="productText">이미지 수정은 목록을 이용해주세요</div>
                                                                 <div class="productImg">
-                                                                    <div class="imgItem">
-                                                                        <span class="imgKind">대표이미지</span>
-                                                                        <div class="imgWrap">
-                                                                            <div class="imgArea">
-                                                                                <img src="../img/item_main.jpg">
-                                                                            </div>
+                                                                    <th:block th:each="fileVO : ${fileList}"
+                                                                              th:with="
+            norm=${#strings.replace(fileVO.filepath, '\\', '/')},
+            parts=${#strings.listSplit(norm, '/')},
+            folder=${parts[ #lists.size(parts) - 2 ]}">
+                                                                        <div class="imgItem">
+                                                                            <span class="imgKind">대표이미지</span>
+                                                                            <div class="imgWrap">
+                                                                                <div class="imgArea">
+                                                                                    <img th:src="@{/display/{filepath}/{uuid}/{filename}
+                      (filepath=${folder},
+                       uuid=${fileVO.uuid},
+                       filename=${fileVO.filename})}">
+                                                                                </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="imgItem">
-                                                                        <span class="imgKind">배너이미지</span>
-                                                                        <div class="imgWrap">
-                                                                            <div class="imgArea">
-                                                                                <img src="../img/item_banner.jpg">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="imgItem">
-                                                                        <span class="imgKind">배너이미지</span>
-                                                                        <div class="imgWrap">
-                                                                            <div class="imgArea">
-                                                                                <img src="../img/item_banner.jpg">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="imgItem">
-                                                                        <span class="imgKind">배너이미지</span>
-                                                                        <div class="imgWrap">
-                                                                            <div class="imgArea">
-                                                                                <img src="../img/item_banner.jpg">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
 
                                                                 </div>
                                                             </div>

@@ -108,6 +108,11 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    public List<ProductUploadVO> getDetailFile(long prodId) {
+        return productMapper.getDetailFile(prodId);
+    }
+
+    @Override
     public ProductVO getDetail(long prodId) {
         return productMapper.getDetail(prodId);
     }

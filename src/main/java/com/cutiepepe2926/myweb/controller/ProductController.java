@@ -1,5 +1,6 @@
 package com.cutiepepe2926.myweb.controller;
 
+import com.cutiepepe2926.myweb.command.ProductUploadVO;
 import com.cutiepepe2926.myweb.command.ProductVO;
 import com.cutiepepe2926.myweb.product.ProductService;
 import com.cutiepepe2926.myweb.util.Criteria;
@@ -53,8 +54,12 @@ public class ProductController {
     public String productDetail(@RequestParam("prodId") long prodId,
                               Model model){
         ProductVO vo = productService.getDetail(prodId);
+        List<ProductUploadVO> fileList = productService.getDetailFile(prodId);
+
         System.out.println(vo);
+        System.out.println(fileList);
         model.addAttribute("vo",vo);
+        model.addAttribute("fileList",fileList);
         return "product/productDetail";
     }
 
