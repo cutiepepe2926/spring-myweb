@@ -17,8 +17,8 @@ public class UserAuthHandler implements HandlerInterceptor {
 //        } else {
 //            return false;
 //        }
-        System.out.println("동작차단");
-        return false;
+        System.out.println("access allow");
+        return true;
     }
 
 }

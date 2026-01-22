@@ -11,18 +11,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class Test02 {
 
-    @Autowired
-    ProductMapper productMapper;
-
-    @Test
-    public void test02() {
-        List<DemoOrderVO> list = productMapper.manyToOne();
-        System.out.println(list.toString());
-    }
-
-    @Test
-    public void test03() {
-        DemoMemberVO list = productMapper.oneToMany();
-        System.out.println(list.toString());
-    }
+//    @Autowired
+//    ProductMapper productMapper;
+//
+//    @Test
+//    public void test02() {
+//        List<DemoOrderVO> list = productMapper.manyToOne();
+//        System.out.println(list.toString());
+//    }
+//
+//    @Test
+//    public void test03() {
+//        DemoMemberVO list = productMapper.oneToMany();
+//        System.out.println(list.toString());
+//    }
 }

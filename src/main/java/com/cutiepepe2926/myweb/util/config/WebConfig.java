@@ -24,4 +24,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**");
     }
 
+
+    // 여러 인터셉트를 다른 경로별로 동작시키려면 하나 더 만드면 된다.
+
+
 }

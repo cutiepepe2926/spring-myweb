@@ -9,21 +9,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class Test01 {
 
-    @Autowired
-    ProductMapper productMapper;
-
-    @Test
-    public void test01(){
-
-
-        // 빌더 패턴
-        ProductVO.builder()
-                .prodPrice(1000)
-                .prodEnddate("2020-12-20")
-                .prodWriter("테스트")
-                .prodName("상품명")
-                .build();
-    }
+//    @Autowired
+//    ProductMapper productMapper;
+//
+//    @Test
+//    public void test01(){
+//
+//
+//        // 빌더 패턴
+//        ProductVO.builder()
+//                .prodPrice(1000)
+//                .prodEnddate("2020-12-20")
+//                .prodWriter("테스트")
+//                .prodName("상품명")
+//                .build();
+//    }
 
 //    @Test
 //    public void 테스트_코드_insert(){

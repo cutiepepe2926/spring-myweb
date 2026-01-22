@@ -540,11 +540,11 @@ CREATE TABLE PRODUCT_UPLOAD (
 	PROD_WRITER VARCHAR(20) ##FK
 );
 
-productCREATE TABLE PRODUCT_UPLOAD (
+CREATE TABLE PRODUCT_UPLOAD (
 	UPLOAD_NO INT PRIMARY KEY auto_increment,
 	FILENAME varchar(100) not null, ##실제파일명
 	FILEPATH varchar(100) not null, ##폴더명
-	UUID varchar(50) not null, ##UUID명
+	UUID varchar(50) not null, ##UUIaddressD명
 	REGDATE TIMESTAMP default now(),
 	PROD_ID INT, ##FK
 	PROD_WRITER VARCHAR(20) ##FK
@@ -555,3 +555,56 @@ SELECT * FROM PRODUCT_UPLOAD;
 COMMIT;
 
 SELECT * FROM USERS;
+
+SELECT * FROM ADDRESS;
+
+SELECT ADDRESS, ADDRESS_NAME, RECIPIENT_NAME, RECIPIENT_PHONE
+FROM ADDRESS WHERE USER_ID = 2;
+
+CREATE TABLE ADDRESS (
+    ADDRESS_ID BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    USER_ID BIGINT UNSIGNED NOT NULL,
+    ADDRESS VARCHAR(255),
+    ADDRESS_NAME VARCHAR(20),
+    RECIPIENT_NAME    VARCHAR(50)  NOT NULL,
+	RECIPIENT_PHONE VARCHAR(20)  NOT NULL,
+    PRIMARY KEY (ADDRESS_ID),
+    FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID)
+);
+
+INSERT INTO ADDRESS(USER_ID, ADDRESS, ADDRESS_NAME, RECIPIENT_NAME, RECIPIENT_PHONE)
+VALUES(1,'대지도 결실군 풍년면 만물로 77', '드론봇 농장', '농장주','010-1234-1234');
+
+INSERT INTO ADDRESS (USER_ID, ADDRESS, ADDRESS_NAME, RECIPIENT_NAME, RECIPIENT_PHONE) VALUES
+(2, '서울특별시 강남구 테헤란로 123, 101동 1203호', '집',        '김민수', '010-1234-0002'),
+(3, '서울특별시 서초구 서초대로 77길 15, 502호',          '회사',      '이서연', '010-2345-0003'),
+(4, '경기도 성남시 분당구 판교역로 235, C동 701호',       '집',        '박지훈', '010-3456-0004'),
+(5, '서울특별시 마포구 월드컵북로 45, 3층',               '스튜디오',   '최수진', '010-4567-0005'),
+(6, '부산광역시 해운대구 센텀중앙로 90, 1702호',           '집',        '정우진', '010-5678-0006'),
+(2, '서울특별시 송파구 올림픽로 300, 리센츠 121동 802호',  '부모님집',  '김민수', '010-1234-0007'),
+(3, '인천광역시 연수구 송도국제대로 168, 901호',           '집',        '이서연', '010-2345-0008'),
+(4, '경기도 용인시 수지구 풍덕천로 11, 2층',               '사무실',     '박지훈', '010-3456-0009'),
+(5, '대전광역시 유성구 대학로 99, B동 405호',              '기숙사A',    '최수진', '010-4567-0010'),
+(6, '대구광역시 수성구 달구벌대로 2450, 801호',            '집',        '정우진', '010-5678-0011'),
+(2, '광주광역시 서구 상무중앙로 7, 1004호',                '세컨드',     '김민수', '010-1234-0012'),
+(3, '울산광역시 남구 삼산중로 100, 402호',                 '집',        '이서연', '010-2345-0013'),
+(4, '경기도 고양시 일산서구 중앙로 1420, 1203호',          '원룸',      '박지훈', '010-3456-0014'),
+(5, '경기도 부천시 길주로 210, 1502호',                    '집',        '최수진', '010-4567-0015'),
+(6, '충청북도 청주시 상당구 남사로 45, 2층',               '창고',       '정우진', '010-5678-0016'),
+(2, '경상남도 창원시 성산구 상남로 120, 703호',            '집',        '김민수', '010-1234-0017'),
+(3, '강원특별자치도 춘천시 중앙로 12, 401호',             '별장',       '이서연', '010-2345-0018'),
+(4, '제주특별자치도 제주시 연동 1234-5, 201호',            '휴가지',     '박지훈', '010-3456-0019'),
+(5, '세종특별자치시 한누리대로 2000, 703호',                '집',        '최수진', '010-4567-0020');
+
+
+commit;
+
+
+CREATE TABLE SEC_USERS(
+	USERNAME VARCHAR(30) PRIMARY KEY,
+    PASSWORD VARCHAR(50) NOT NULL,
+    ROLE VARCHAR(30)
+);
+
+ALTER TABLE SHOP
+ADD COLUMN STATUS TINYINT AFTER PRICE;
